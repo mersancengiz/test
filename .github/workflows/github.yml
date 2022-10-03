@@ -14,8 +14,8 @@ jobs:
     - name: Change versions in files
       run: |
         set -e
-        echo 'version_new="3.3."$((20+${{github.run_number}}))' >> $GITHUB_ENV
-        echo $version_new
+        echo version_new="3.3."$((20+${{github.run_number}}))
+        echo "ver=$version_new" >> $GITHUB_ENV
         echo ${{secrets.TEST}}
         version=$(cat VERSION)
         echo $version
@@ -32,7 +32,7 @@ jobs:
         echo "Creating GitHub release..."
         #create_asset_json=$(curl -# -XPOST -H "Authorization: token ${{secrets.TEST}}" -H "Content-Type: application/json" -H "Accept:application/json" --data-binary '{"tag_name": "v$version_new","target_commitish": "master","name": "iyzipay-java v$version_new","body": "version $version_new","draft": false,"prerelease": false}' https://api.github.com/repos/mersancengiz/test/releases)
         echo $create_asset_json
-        echo $env.version_new
+        echo $env.ver
         #echo "GitHub release created!"
         #upload_url=$( echo $create_asset_json | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["upload_url"][0:obj["upload_url"].find("{")];' )
         #echo $upload_url
