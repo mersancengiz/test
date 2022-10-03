@@ -26,4 +26,4 @@ jobs:
         git config user.email ersan.cengiz@iyzico.com
         git add .
         git commit -m "Test commit"
-        git push origin master
+        git push origin main
