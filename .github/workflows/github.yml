@@ -14,5 +14,5 @@ jobs:
     - name: Change versions in files
       run: |
         set -e
-        $version_new = "3.3."+ $((2+${{github.run_number}}))
+        version_new = "3.3."$((2+${{github.run_number}}))
         echo $version_new
