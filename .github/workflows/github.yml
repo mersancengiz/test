@@ -19,7 +19,7 @@ jobs:
         echo ${{secrets.TEST}}
         version=$(cat VERSION)
         echo $version
-        #sed -i -e 's/'$version'/'$version_new'/g' VERSION README.md
+        sed -i -e 's/'$version'/'$version_new'/g' VERSION README.md
     - name: Git Tasks
       run: |
         git config user.name "mersancengiz"
