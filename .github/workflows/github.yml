@@ -27,3 +27,16 @@ jobs:
         git add .
         git commit -m "Test commit"
         git push origin main
+    - name: Github Release
+      run: |
+        echo "Creating GitHub release..."
+        create_asset_json=$( curl -# -XPOST \
+        -H "Authorization: token ${{secrets.TEST}}" \
+        -H "Content-Type: application/json" \
+        -H "Accept:application/json" \
+        --data-binary '{"tag_name": "v$version_new","target_commitish": "master","name": "iyzipay-java v$version_new","body": "version $version_new","draft": false,"prerelease": false}' \
+        https://api.github.com/repos/iyzico/iyzipay-java/releases )
+        echo $create_asset_json
+        echo "GitHub release created!"
+        upload_url=$( echo $create_asset_json | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["upload_url"][0:obj["upload_url"].find("{")];' )
+        echo $upload_url
