@@ -30,7 +30,7 @@ jobs:
     - name: Github Release
       run: |
         echo "Creating GitHub release..."
-        create_asset_json=$(curl -# -XPOST -H "Authorization: token ${{secrets.TEST}}" -H "Content-Type: application/json" -H "Accept:application/json" --data-binary '{"tag_name": "${{env.ver}}","target_commitish": "master","name": "test ${{env.ver}}","body": "version ${{env.ver}}","draft": false,"prerelease": false}' https://api.github.com/repos/mersancengiz/test/releases)
+        create_asset_json=$( curl -# -XPOST -H "Authorization: token ${{secrets.TEST}}" -H "Content-Type: application/json" -H "Accept:application/json" --data-binary '{"tag_name": "${{env.ver}}","target_commitish": "master","name": "test ${{env.ver}}","body": "version ${{env.ver}}","draft": false,"prerelease": false}' https://api.github.com/repos/mersancengiz/test/releases )
         echo $create_asset_json
         echo ${{env.ver}}
         #echo "GitHub release created!"
