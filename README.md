@@ -1,2 +1,2 @@
 # test
-VERSION = 5.5.54
+VERSION = 5.5.55
