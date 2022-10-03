@@ -34,4 +34,4 @@ jobs:
         echo $create_asset_json
         echo "GitHub release created!"
         #upload_url=$( echo $create_asset_json | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["upload_url"][0:obj["upload_url"].find("{")];' )
-        #echo $upload_url
+        #echo $upload_url 
