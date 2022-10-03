@@ -1,2 +1,2 @@
 # test
-VERSION = 3.3.45
+VERSION = 3.3.46
