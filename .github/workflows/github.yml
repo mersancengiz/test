@@ -20,5 +20,8 @@ jobs:
         version=$(cat VERSION)
         echo $version
         sed -i -e 's/'$version'/'$version_new'/g' VERSION
-        version=$(cat VERSION)
-        echo $version
+    - name: Git Tasks
+      run: |
+        git add .
+        git commit -m "Test commit"
+        git push origin master
