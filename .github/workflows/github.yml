@@ -19,3 +19,4 @@ jobs:
         echo ${{secrets.TEST}}
         version=$(cat VERSION)
         echo $version
+        sed -i -e 's/$version/$version_new/g' VERSION
