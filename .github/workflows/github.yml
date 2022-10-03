@@ -15,15 +15,14 @@ jobs:
       run: |
         set -e
         echo version_new="5.5."$((1+${{github.run_number}}))
-        echo $version_new
-        echo ${{secrets.TEST}}
         version=$(cat VERSION)
+        echo $version_new
         echo $version
-        sed -i -e 's/'$version'/'$version_new'/g' VERSION README.md
-    - name: Git Tasks
-      run: |
-        git config user.name "mersancengiz"
-        git config user.email ersan.cengiz@iyzico.com
-        git add .
-        git commit -m "Test commit"
-        git push origin main
+        #sed -i -e 's/'$version'/'$version_new'/g' VERSION README.md
+    #- name: Git Tasks
+      #run: |
+        #git config user.name "mersancengiz"
+        #git config user.email ersan.cengiz@iyzico.com
+        #git add .
+        #git commit -m "Test commit"
+        #git push origin main
