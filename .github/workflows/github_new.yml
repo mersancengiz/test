@@ -5,6 +5,16 @@ on:
     branches: [ "main" ]
 
 jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Change versions in files
+      run: echo ${{github.run_number}}
+      
   build:
 
     runs-on: ubuntu-latest
