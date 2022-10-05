@@ -35,5 +35,5 @@ jobs:
         echo "GitHub release created!"
         python -V
         upload_url=$( echo $create_asset_json | python -c 'import json,sys;obj=json.load(sys.stdin);print (obj["upload_url"][0:obj["upload_url"].find("{")]);' )
-        #upload_url=$( echo "ersan" | python -c "import json,sys; print('ersan');" )
+        #upload_url=$( echo "ersan" | python -c "import json,sys; prin('ersan');" )
         echo $upload_url 
