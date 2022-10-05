@@ -24,6 +24,7 @@ jobs:
       run: |
         git config user.name "mersancengiz"
         git config user.email ersan.cengiz@iyzico.com
+        git remote set-url origin https://${{secrets.TOKEN_GITHUB}}:@github.com/mersancengiz/test.git
         git add .
         git commit -m "Test commit"
         git push origin main
