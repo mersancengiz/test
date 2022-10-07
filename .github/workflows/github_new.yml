@@ -1,19 +1,10 @@
-name: Java CI with Maven
+name: master_state
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-
-  test_new:
-    name: ersan
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Change versions in files
-      run: echo ${{github.run_number}}
       
   build:
     name: cengiz
