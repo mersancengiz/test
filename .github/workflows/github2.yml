@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: ersan_state
 
 on:
   pull_request:
@@ -6,7 +6,6 @@ on:
 
 jobs:
   test:
-    name: mehmet
     runs-on: ubuntu-latest
 
     steps:
