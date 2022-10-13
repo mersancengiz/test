@@ -1,4 +1,4 @@
 # test
-VERSION = 5.5.2
+VERSION = 6.0.3
 # DENEME
 # TEST 1
