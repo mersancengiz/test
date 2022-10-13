@@ -1,22 +1,12 @@
-name: master_state
+name: master
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Change versions in files
-      run: echo ${{github.run_number}}
-      
+jobs:      
   build:
     runs-on: ubuntu-latest
-    #if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     env:
       GITHUB_TOKEN: ${{secrets.TOKEN_GITHUB}}
     steps:
@@ -34,14 +24,14 @@ jobs:
       run: |
         git config user.name "mersancengiz"
         git config user.email ersan.cengiz@iyzico.com
-        #git remote set-url origin https://${{secrets.TOKEN_GITHUB}}:@github.com/mersancengiz/test.git
+        git remote set-url origin https://${{secrets.GITHUB_TOKEN}}:@github.com/mersancengiz/test.git
         git add .
         git commit -m "Test commit"
         git push origin main
     - name: Github Release
       run: |
         echo "Creating GitHub release..."
-        create_asset_json=$( curl -# -XPOST -H "Authorization: token ${{secrets.TOKEN_GITHUB}}" -H "Content-Type: application/json" -H "Accept:application/json" --data-binary '{"tag_name": "${{env.ver}}","target_commitish": "main","name": "test-java ${{env.ver}}","body": "version ${{env.ver}}","draft": false,"prerelease": false}' https://api.github.com/repos/mersancengiz/test/releases )
+        create_asset_json=$( curl -# -XPOST -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" -H "Content-Type: application/json" -H "Accept:application/json" --data-binary '{"tag_name": "${{env.ver}}","target_commitish": "main","name": "test-java ${{env.ver}}","body": "version ${{env.ver}}","draft": false,"prerelease": false}' https://api.github.com/repos/mersancengiz/test/releases )
         echo $create_asset_json
         echo "GitHub release created!"
         python -V
