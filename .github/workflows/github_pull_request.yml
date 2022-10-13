@@ -11,3 +11,36 @@ jobs:
     - uses: actions/checkout@v3
     - name: Change versions in files
       run: echo ${{github.run_number}}
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{secrets.TOKEN_GITHUB}}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Change versions in files
+      run: |
+        set -e
+        version_new="6.0."$((1+${{github.run_number}}))
+        version=$(cat VERSION)
+        echo $version_new
+        echo $version
+        sed -i -e 's/'$version'/'$version_new'/g' VERSION README.md
+        echo "ver=$version_new" >> $GITHUB_ENV
+    - name: Git Tasks
+      run: |
+        git config user.name "mersancengiz"
+        git config user.email ersan.cengiz@iyzico.com
+        git remote set-url origin https://${{secrets.GITHUB_TOKEN}}:@github.com/mersancengiz/test.git
+        git add .
+        git commit -m "Test commit"
+        git push origin main
+    - name: Github Release
+      run: |
+        echo "Creating GitHub release..."
+        create_asset_json=$( curl -# -XPOST -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" -H "Content-Type: application/json" -H "Accept:application/json" --data-binary '{"tag_name": "${{env.ver}}","target_commitish": "main","name": "test-java ${{env.ver}}","body": "version ${{env.ver}}","draft": false,"prerelease": false}' https://api.github.com/repos/mersancengiz/test/releases )
+        echo $create_asset_json
+        echo "GitHub release created!"
+        python -V
+        upload_url=$( echo $create_asset_json | python -c 'import json,sys;obj=json.load(sys.stdin);print (obj["upload_url"][0:obj["upload_url"].find("{")]);' )
+        #upload_url=$( echo "ersan" | python -c "import json,sys; print('ersan');" )
+        echo $upload_url 
